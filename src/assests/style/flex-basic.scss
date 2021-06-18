@@ -1,0 +1,55 @@
+// 禁止用户选中 鼠标变为手形
+%unable-select {
+  user-select: none;
+  cursor: pointer;
+}
+
+// 填满父元素 position: relative | absolute;
+%full {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+}
+
+//
+%flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// flex 垂直水平居中
+%flex-center-row-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
+%flex-center-col {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+%flex-center-row {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+// flex 水平居中自动换行间隔自适应
+%flex-center-row-wrap {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap
+}
+
+// 背景预处理
+%background-pre {
+  background-position: 0, 0;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
