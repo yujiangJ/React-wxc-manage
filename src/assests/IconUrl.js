@@ -1,5 +1,4 @@
-export default imgUrlJSON = {
-  Logo: '',
+const imgUrlJSON = {
   logoWhite: '',
   iconActive: '',
   loginBack: 'https://osres.wangxiaobao.com/mar-tech/loginBack.png',
@@ -7,5 +6,5 @@ export default imgUrlJSON = {
   loginCenter: 'https://osres.wangxiaobao.com/mar-tech/loginCenter.png',
   LoginTop: 'https://osres.wangxiaobao.com/mar-tech/LoginTop.png',
   logo: 'https://osres.wangxiaobao.com/mar-tech/logo.png',
-  
 }
+export default imgUrlJSON;

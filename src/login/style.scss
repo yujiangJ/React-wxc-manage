@@ -44,12 +44,11 @@
     box-sizing: border-box;
     .wrap-title {
       font-size: 24px;
-      font-family: PingFangSC-Semibold, PingFang SC;
       font-weight: 600;
       color: #303133;
       line-height: 33px;
       text-shadow: 0px 8px 32px rgba(209, 209, 209, 0.24);
-      margin-bottom: 40px;
+      display: flex;
     }
     .login-auxiliary {
       margin: 16px 0;
@@ -61,5 +60,127 @@
     height: 48px;
     font-size: 14px;
     background: #3a74f2;
+  }
+}
+.l-top-img {
+  position: absolute;
+  width: 230px;
+  height: 272px;
+  top: 14%;
+  right: 25%;
+  -moz-animation-name: TopfadeInOut;
+  -moz-animation-duration: 1s;
+  -moz-animation-timing-function: ease-in-out;
+
+  -ms-animation-name: TopfadeInOut;
+  -ms-animation-duration: 1s;
+  -ms-animation-timing-function: ease-in-out;
+
+  animation-name: TopfadeInOut;
+  animation-duration: 1s;
+  animation-timing-function:ease-in-out;
+
+  -webkit-animation-name: TopfadeInOut;
+  -webkit-animation-timing-function: ease-in-out;
+  -webkit-animation-duration: 1s;
+}
+@keyframes TopfadeInOut {
+  0% {
+    top: 11%;
+    opacity: 0;
+  }
+  100% {
+    top: 14%;
+    opacity: 1;
+  }
+}
+.l-center-img {
+  position: absolute;
+  width: 136px;
+  height: 128px;
+  bottom: 44%;
+  left: 22%;
+  -moz-animation-name: cenfadeInOut;
+  -moz-animation-duration: 1s;
+  -moz-animation-timing-function: ease-in-out;
+
+  -ms-animation-name: cenfadeInOut;
+  -ms-animation-duration: 1s;
+  -ms-animation-timing-function: ease-in-out;
+
+  animation-name: cenfadeInOut;
+  animation-duration: 1s;
+  animation-timing-function:ease-in-out;
+
+  -webkit-animation-name: cenfadeInOut;
+  -webkit-animation-timing-function: ease-in-out;
+  -webkit-animation-duration: 1s;
+}
+@keyframes cenfadeInOut {
+  0% {
+    bottom: 42%;
+    opacity: 0;
+  }
+  100% {
+    bottom: 44%;
+    opacity: 1;
+  }
+}
+.l-bottom-img {
+  position: absolute;
+  width: 227px;
+  height: 344px;
+  top: 56%;
+  left: 0;
+  -moz-animation-name: bottomfadeInOut;
+  -moz-animation-duration: 1s;
+  -moz-animation-timing-function: ease-in-out;
+
+  -ms-animation-name: bottomfadeInOut;
+  -ms-animation-duration: 1s;
+  -ms-animation-timing-function: ease-in-out;
+
+  animation-name: bottomfadeInOut;
+  animation-duration: 1s;
+  animation-timing-function:ease-in-out;
+
+  -webkit-animation-name: bottomfadeInOut;
+  -webkit-animation-timing-function: ease-in-out;
+  -webkit-animation-duration: 1s;
+}
+@keyframes bottomfadeInOut {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.trans{
+  -moz-animation-name: loginfadeInOut;
+  -moz-animation-duration: 1s;
+  -moz-animation-timing-function: ease-in-out;
+
+  -ms-animation-name: loginfadeInOut;
+  -ms-animation-duration: 1s;
+  -ms-animation-timing-function: ease-in-out;
+
+  animation-name: loginfadeInOut;
+  animation-duration: 1s;
+  animation-timing-function:ease-in-out;
+
+  -webkit-animation-name: loginfadeInOut;
+  -webkit-animation-timing-function: ease-in-out;
+  -webkit-animation-duration: 1s;
+}
+@keyframes loginfadeInOut {
+  0% {
+    opacity: 0;
+    bottom: 0;
+  }
+  100% {
+    opacity: 1;
+    bottom: 50%;
+    transform: translateY(50%);
   }
 }

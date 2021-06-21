@@ -1,4 +1,4 @@
-'use strict';
+
 
 const fs = require('fs');
 const path = require('path');
@@ -510,9 +510,18 @@ module.exports = function (webpackEnv) {
                   sourceMap: isEnvProduction
                     ? shouldUseSourceMap
                     : isEnvDevelopment,
+                  modules: true
                 },
                 'sass-loader'
-              ),
+              ).concat({
+                loader: "sass-resources-loader",
+                options: {
+                  resources: [
+                    // resolve方法第二个参数为scss配置文件地址，如果有多个，就进行依次添加即可
+                    path.resolve(__dirname, "./../src/assests/style/output.scss"),
+                  ],
+                },
+              }),
               // Don't consider CSS imports dead code even if the
               // containing package claims to have no side effects.
               // Remove this when webpack adds a warning or an error for this.

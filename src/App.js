@@ -4,7 +4,7 @@ import {Route, Switch} from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import Index from '@/Layout/index'
 import Login from '@/login'
-import './App.scss'
+import './App.css'
 
 import {
   changehostName,
