@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { shallowEqual, useSelector } from "react-redux";
-import login from "./style.scss";
+import { shallowEqual, useSelector, useDispatch } from "react-redux";
+import { useHistory } from 'react-router-dom';
+import loginStyle from "./style.scss";
 import imgUrlJSON from "../assests/iconUrl.js";
 import { Form, Input, Button } from "antd";
 import { Select } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
+import { userLogin } from './store/action';
+let Base64 = require("js-base64").Base64;
 
 export default function Login() {
   const { Option } = Select;
+  const dispatch = useDispatch()
   const changeData  = [{
     value: 0,
     label: "平台登录"
@@ -16,6 +20,7 @@ export default function Login() {
     value: 1,
     label: "租户登录"
   }];
+
   const { navTitle, localName } = useSelector(
     (state) => ({
       navTitle: state.app.navTitle,
@@ -24,22 +29,27 @@ export default function Login() {
     shallowEqual
   );
 
-  const [form, setform] = useState({account: "", password: "", tenantNo: "", loginType: localName === "without" ? 0 : 1});
+  let history = useHistory();
 
+  const [loginType, setloginType] = useState(localName === "without" ? 0 : 1);
+
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
-  }, [form]);
-
-
-  function handleChange(value) {
-    setform({...form, loginType: parseInt(value)});
-  }
+  }, [loginType]);
 
   const onFinish = (values) => {
-    console.log("Received values of form: ", values);
+    setLoading(true);
+    let formData = JSON.parse(JSON.stringify(values));
+    formData.password = Base64.encode(formData.password);
+    formData.loginType = loginType;
+    dispatch(userLogin(formData)).then((res) => {
+      setLoading(false);
+      history.push('/');
+    })
   };
   const showSelect = ()=> {
     if(localName === 'localhost') {
-      return  <Select dropdownClassName="fr" value={form.loginType}  onChange={handleChange}>
+      return  <Select dropdownClassName="fr" value={loginType}  onChange = {(e) => { console.log(e); setloginType(parseInt(e))}}>
         {changeData.map(item => (
           <Option key={item.value} value={item.value}>{item.label}</Option>
         ))}
@@ -49,8 +59,7 @@ export default function Login() {
     }
   };
   const showTentNo = () => {
-    debugger
-    if(localName === 'without' || form.loginType === 1) {
+    if(localName === 'without' || loginType === 1) {
       return  <Form.Item
       name="tenantNo"
       rules={[{ required: true, message: "请输入租户号" }]}
@@ -66,26 +75,26 @@ export default function Login() {
     }
   };
   return (
-    <div className={login["login-box"]}>
-      <img className={login["l-top-img"]} src={imgUrlJSON.LoginTop} alt="" />
+    <div className={loginStyle["login-box"]}>
+      <img className={loginStyle["l-top-img"]} src={imgUrlJSON.LoginTop} alt="" />
       <img
-        className={login["l-center-img"]}
+        className={loginStyle["l-center-img"]}
         src={imgUrlJSON.loginCenter}
         alt=""
       />
       <img
-        className={login["l-bottom-img"]}
+        className={loginStyle["l-bottom-img"]}
         src={imgUrlJSON.loginBottom}
         alt=""
       />
-      <div className={login["login-header"]}>
+      <div className={loginStyle["login-header"]}>
         <img src={imgUrlJSON.logo} alt="" />
         <span>{navTitle}</span>
       </div>
-      <div className={login["line"]}></div>
-      <div className={`${login["login-wrap"]} ${login.trans}`}>
+      <div className={loginStyle["line"]}></div>
+      <div className={`${loginStyle["login-wrap"]} ${loginStyle.trans}`}>
         <div style={{marginBottom: 40}}>
-          <span className={`${login["wrap-title"]} fl`}>登录</span>
+          <span className={`${loginStyle["wrap-title"]} fl`}>登录</span>
           {showSelect()}
         </div>
         <Form
@@ -102,7 +111,7 @@ export default function Login() {
             <Input
               size="large"
               prefix={<UserOutlined className="site-form-item-icon" />}
-              placeholder="Username"
+              placeholder="账号"
             />
           </Form.Item>
           <Form.Item
@@ -113,16 +122,17 @@ export default function Login() {
               size="large"
               prefix={<LockOutlined className="site-form-item-icon" />}
               type="password"
-              placeholder="Password"
+              placeholder="密码"
             />
           </Form.Item>
           <Form.Item>
             <Button
               type="primary"
+              loading={loading}
               htmlType="submit"
               className="login-form-button"
             >
-              Log in
+              登录
             </Button>
           </Form.Item>
         </Form>

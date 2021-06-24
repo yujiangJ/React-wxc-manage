@@ -18,6 +18,8 @@ export const changeShowLogo = (data) => ({
   sidebarLogo: data,
 })
 
+
+
 function reducer(state = defaultState, action) {
   switch (action.type) {
     case 'CHANGE_SHOWLOGO':
